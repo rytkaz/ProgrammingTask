@@ -7,16 +7,15 @@ namespace TutoTOONS_Task.Data
         private const int MaxDataCoordinate = 1000;
         private const int MinDataCoordinate = 0;
 
-        public static Vector2 ConvertCoordinates(int x, int y)
+        public static Vector2 ConvertCoordinates(int x, int y, float displayHeight)
         {
             int maxDataDistance = MaxDataCoordinate - MinDataCoordinate;
-            float screenHeight = Screen.height;
 
             float convertedX = Mathf.Clamp(x, MinDataCoordinate, MaxDataCoordinate);
-            convertedX = screenHeight / maxDataDistance * convertedX - screenHeight / 2;
+            convertedX = displayHeight / maxDataDistance * convertedX - displayHeight / 2;
 
             float convertedY = Mathf.Clamp(y, MinDataCoordinate, MaxDataCoordinate);
-            convertedY = -screenHeight / maxDataDistance * convertedY + screenHeight / 2;
+            convertedY = -displayHeight / maxDataDistance * convertedY + displayHeight / 2;
 
             return new Vector2(convertedX, convertedY);
         }

@@ -8,6 +8,7 @@ namespace TutoTOONS_Task.Data
     {
         [SerializeField] private TextAsset DataFile;
         [SerializeField] private LevelSelection LevelSelection;
+        [SerializeField] private RectTransform LevelDisplayRect;
 
         public List<Level> Levels = new List<Level>();
 
@@ -22,7 +23,7 @@ namespace TutoTOONS_Task.Data
             GameData data = JsonUtility.FromJson<GameData>(DataFile.text);
             for(int i = 0; i < data.levels.Length; i++)
             {
-                Level newLevel = new Level(data.levels[i].level_data);
+                Level newLevel = new Level(data.levels[i].level_data, LevelDisplayRect.rect.height);
                 if(newLevel.Points.Count > 1)
                 {
                     Levels.Add(newLevel);

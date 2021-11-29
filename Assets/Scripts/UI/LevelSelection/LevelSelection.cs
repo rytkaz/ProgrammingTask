@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TutoTOONS_Task.Data;
@@ -18,6 +17,12 @@ namespace TutoTOONS_Task.UI
                 LevelSelectionEntry newEntry = Instantiate(EntryPrefab, LevelsRoot);
                 newEntry.Setup(i, this);
             }
+            Show();
+        }
+
+        public void Show()
+        {
+            gameObject.SetActive(true);
         }
 
         public void OnLevelSelected(int levelIndex)

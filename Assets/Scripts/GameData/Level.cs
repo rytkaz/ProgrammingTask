@@ -7,7 +7,7 @@ namespace TutoTOONS_Task.Data
     {
         public List<Vector2> Points { private set; get; } = new List<Vector2>();
 
-        public Level(int[] pointCoordinates)
+        public Level(int[] pointCoordinates, float displayHeight)
         {
             for(int i = 0; i < pointCoordinates.Length; i += 2)
             {
@@ -17,7 +17,7 @@ namespace TutoTOONS_Task.Data
                     return;
                 }
 
-                Points.Add(CoordinatesConversion.ConvertCoordinates(pointCoordinates[i], pointCoordinates[i+1]));
+                Points.Add(CoordinatesConversion.ConvertCoordinates(pointCoordinates[i], pointCoordinates[i+1], displayHeight));
             }
         }
     }
