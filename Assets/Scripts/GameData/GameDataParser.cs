@@ -1,18 +1,20 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TutoTOONS_Task.UI;
 
-namespace TutoTOONS_Task
+namespace TutoTOONS_Task.Data
 {
     public class GameDataParser : MonoBehaviour
     {
         [SerializeField] private TextAsset DataFile;
+        [SerializeField] private LevelSelection LevelSelection;
 
         public List<Level> Levels = new List<Level>();
 
         private void Awake()
         {
             ParseGameData();
+            LevelSelection.OnLevelsDataParsed(Levels);
         }
 
         private void ParseGameData()

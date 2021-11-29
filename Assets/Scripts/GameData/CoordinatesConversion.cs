@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TutoTOONS_Task
+namespace TutoTOONS_Task.Data
 {
     public static class CoordinatesConversion
     {
@@ -18,7 +18,6 @@ namespace TutoTOONS_Task
             float convertedY = Mathf.Clamp(y, MinDataCoordinate, MaxDataCoordinate);
             convertedY = -screenHeight / maxDataDistance * convertedY + screenHeight / 2;
 
-            Debug.Log($"Original: {x} {y} ; Converted: {convertedX} {convertedY} ; Screen Height: {screenHeight}");
             return new Vector2(convertedX, convertedY);
         }
     }

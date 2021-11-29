@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TutoTOONS_Task
+namespace TutoTOONS_Task.Data
 {
     public class Level
     {

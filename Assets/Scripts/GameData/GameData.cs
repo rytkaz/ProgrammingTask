@@ -1,4 +1,4 @@
-namespace TutoTOONS_Task
+namespace TutoTOONS_Task.Data
 {
     [System.Serializable]
     public struct GameData
