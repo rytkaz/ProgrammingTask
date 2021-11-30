@@ -9,13 +9,16 @@ namespace TutoTOONS_Task
     {
         [SerializeField] private GameDataParser GameDataParser;
         [SerializeField] private LevelDisplay LevelDisplay;
+        [SerializeField] private RopesDisplay RopesDisplay;
         [SerializeField] private LevelSelection LevelSelection;
 
         private int CurrentClaimedPoint;
         private int LastPointIndex;
+        private int CurrentLevel;
 
         public void StartLevel(int levelIndex)
         {
+            CurrentLevel = levelIndex;
             CurrentClaimedPoint = -1;
             LastPointIndex = GameDataParser.Levels[levelIndex].Points.Count - 1;
             LevelDisplay.ShowLevel(GameDataParser.Levels[levelIndex].Points);
@@ -29,28 +32,36 @@ namespace TutoTOONS_Task
             }
 
             CurrentClaimedPoint = index;
-            if(CurrentClaimedPoint == LastPointIndex)
+            if(CurrentClaimedPoint > 0)
             {
-                LevelDisplay.OnLastPointClaimed();
+                RopesDisplay.ConnectPoints(GameDataParser.Levels[CurrentLevel].Points[CurrentClaimedPoint - 1], GameDataParser.Levels[CurrentLevel].Points[CurrentClaimedPoint]);
+            }
+
+            if (CurrentClaimedPoint == LastPointIndex)
+            {
+                RopesDisplay.OnRopeAnimationsFinished.AddListener(OnLevelCompleted);
+                RopesDisplay.ConnectPoints(GameDataParser.Levels[CurrentLevel].Points[LastPointIndex], GameDataParser.Levels[CurrentLevel].Points[0]);
             }
             return true;
         }
 
-        public void OnLevelCompleted()
+        private void OnLevelCompleted()
         {
+            RopesDisplay.OnRopeAnimationsFinished.RemoveListener(OnLevelCompleted);
             StartCoroutine(BackToLevelSelection());
         }
 
         private IEnumerator BackToLevelSelection()
         {
             float elapsedTime = 0;
-            float returnDelay = 2;
+            float returnDelay = 1;
             while(elapsedTime < returnDelay)
             {
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
 
+            RopesDisplay.Hide();
             LevelDisplay.Hide();
             LevelSelection.Show();
         }

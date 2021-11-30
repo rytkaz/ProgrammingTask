@@ -11,7 +11,6 @@ namespace TutoTOONS_Task.UI
         [SerializeField] private GameplayManager GameplayManager;
 
         private List<LevelPointDisplay> SpawnedPoints = new List<LevelPointDisplay>();
-        private int LastUsedPointIndex = 0;
 
         public void ShowLevel(List<Vector2> points)
         {
@@ -25,7 +24,6 @@ namespace TutoTOONS_Task.UI
                 SpawnedPoints[i].Setup(i, points[i], GameplayManager);
                 SpawnedPoints[i].gameObject.SetActive(true);
             }
-            LastUsedPointIndex = points.Count - 1;
 
             for (int i = points.Count; i < SpawnedPoints.Count; i++)
             {
@@ -33,12 +31,6 @@ namespace TutoTOONS_Task.UI
             }
 
             GameplayScreen.SetActive(true);
-        }
-
-        public void OnLastPointClaimed()
-        {
-            //TODO: Connect last point to first point
-            GameplayManager.OnLevelCompleted();
         }
 
         public void Hide()
